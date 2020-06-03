@@ -66,6 +66,7 @@
     <Compile Include="Assets\Cartoon Heroes\Scripts\SetCharacter\SetCharacter.cs" />
     <Compile Include="Assets\Scripts\Character\AnimationMove.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonMove.cs" />
+    <Compile Include="Assets\Scripts\Enemy\AnimationMoveEnemy.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Otros/Unity/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
