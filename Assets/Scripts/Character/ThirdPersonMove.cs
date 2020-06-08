@@ -8,7 +8,6 @@ public class ThirdPersonMove : MonoBehaviour
     [Header("Movement Direction")]
     private float horizontal;
     private float vertical;
-    private Vector3 direction;
 
     [Header("Movement Speed")]
     private float speed;
@@ -19,7 +18,7 @@ public class ThirdPersonMove : MonoBehaviour
     private CharacterController controller;
     private MainCameraMove cam;
 
-    public Vector3 Direction { get => this.direction; }
+    public Vector3 Direction { get; private set; }
 
     private void Awake()
     {
@@ -31,14 +30,14 @@ public class ThirdPersonMove : MonoBehaviour
 
     void Update()
     {
-        this.Move();
+        Move();
     }
 
     private void Move()
     {
         this.horizontal = Input.GetAxisRaw("Horizontal");
         this.vertical = Input.GetAxisRaw("Vertical");
-        this.direction = new Vector3(this.horizontal, 0f, this.vertical).normalized;
+        Direction = new Vector3(this.horizontal, 0f, this.vertical).normalized;
         if (Direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + this.cam.Camera.eulerAngles.y;

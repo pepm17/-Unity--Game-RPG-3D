@@ -16,7 +16,7 @@ public class AnimationMoveEnemy : MonoBehaviour
 
     private void Update()
     {
-        this.Death();
+        Death();
     }
 
     public void Damage()
@@ -30,7 +30,7 @@ public class AnimationMoveEnemy : MonoBehaviour
         if(this.pointsEnemy.Health <= 0)
         {
             this.animator.SetBool("Death", true);
-            StartCoroutine(this.RecoverFromAnimation(2, 5f));
+            StartCoroutine(RecoverFromAnimation(2, 5f));
         }
     }
 
@@ -46,6 +46,7 @@ public class AnimationMoveEnemy : MonoBehaviour
                 }
             case 2:
                 {
+                    this.pointsEnemy.GiveExperieceToDie();
                     Destroy(animator.gameObject);
                     break;
                 }

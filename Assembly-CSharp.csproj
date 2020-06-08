@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Camera\MainCameraMove.cs" />
     <Compile Include="Assets\Scripts\Character\AnimationMove.cs" />
     <Compile Include="Assets\Scripts\Character\Interaction.cs" />
+    <Compile Include="Assets\Scripts\Character\Status.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonMove.cs" />
     <Compile Include="Assets\Scripts\Enemy\AnimationMoveEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\PointsEnemy.cs" />
