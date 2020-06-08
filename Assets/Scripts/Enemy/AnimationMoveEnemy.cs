@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AnimationMoveEnemy : MonoBehaviour
 {
+    [Header("References")]
     private Animator animator;
     private PointsEnemy pointsEnemy;
 
-    private void Start()
+    private void Awake()
     {
         this.animator = GetComponent<Animator>();
         this.pointsEnemy = GetComponent<PointsEnemy>();
@@ -21,13 +22,7 @@ public class AnimationMoveEnemy : MonoBehaviour
     public void Damage()
     {
         this.animator.SetBool("Damage", true);
-        StartCoroutine(this.RecoverFromDamage());
-    }
-
-    IEnumerator RecoverFromDamage()
-    {
-        yield return new WaitForSeconds(0.1f);
-        this.animator.SetBool("Damage", false);
+        StartCoroutine(this.RecoverFromAnimation(1, 0.1f));
     }
 
     private void Death()
@@ -35,12 +30,25 @@ public class AnimationMoveEnemy : MonoBehaviour
         if(this.pointsEnemy.Health <= 0)
         {
             this.animator.SetBool("Death", true);
-            StartCoroutine(this.DeseapearBody());
+            StartCoroutine(this.RecoverFromAnimation(2, 5f));
         }
     }
-    IEnumerator DeseapearBody()
+
+    IEnumerator RecoverFromAnimation(int interaction, float time)
     {
-        yield return new WaitForSeconds(5f);
-        Destroy(animator.gameObject);
+        yield return new WaitForSeconds(time);
+        switch (interaction)
+        {
+            case 1:
+                {
+                    this.animator.SetBool("Damage", false);
+                    break;
+                }
+            case 2:
+                {
+                    Destroy(animator.gameObject);
+                    break;
+                }
+        }
     }
 }

@@ -5,24 +5,30 @@ using UnityEngine;
 
 public class ThirdPersonMove : MonoBehaviour
 {
-    //private MainCameraMove cam;
-    private float speed = 6;    
-    private float turnSmoothTime;
-    private float turnSmoothVelocity;
+    [Header("Movement Direction")]
     private float horizontal;
     private float vertical;
     private Vector3 direction;
+
+    [Header("Movement Speed")]
+    private float speed;
+    private float turnSmoothTime;
+    private float turnSmoothVelocity;
+
+    [Header("References")]
     private CharacterController controller;
+    private MainCameraMove cam;
 
-    public Vector3 Direction { get => direction; }
+    public Vector3 Direction { get => this.direction; }
 
-    private void Start()
+    private void Awake()
     {
         this.controller = GetComponent<CharacterController>();
+        this.cam = FindObjectOfType<MainCameraMove>();
         this.turnSmoothTime = 0.09f;
+        this.speed = 6;
     }
 
-    // Update is called once per frame
     void Update()
     {
         this.Move();
@@ -30,14 +36,12 @@ public class ThirdPersonMove : MonoBehaviour
 
     private void Move()
     {
-        MainCameraMove cam = FindObjectOfType<MainCameraMove>();
         this.horizontal = Input.GetAxisRaw("Horizontal");
         this.vertical = Input.GetAxisRaw("Vertical");
         this.direction = new Vector3(this.horizontal, 0f, this.vertical).normalized;
-
         if (Direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + cam.Camera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg + this.cam.Camera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref this.turnSmoothVelocity, this.turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;

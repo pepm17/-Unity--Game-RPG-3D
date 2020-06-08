@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AnimationMove : MonoBehaviour
 {
+    [Header("References")]
     private ThirdPersonMove thirdPersonMove;
     private Animator animator;
 
-    private void Start()
+    private void Awake()
     {
         this.animator = GetComponent<Animator>();
         this.thirdPersonMove = GetComponent<ThirdPersonMove>();
