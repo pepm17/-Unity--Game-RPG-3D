@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Cartoon Heroes\Scripts\SetCharacter\SetCharacter.cs" />
+    <Compile Include="Assets\Scripts\Camera\MainCameraMove.cs" />
     <Compile Include="Assets\Scripts\Character\AnimationMove.cs" />
     <Compile Include="Assets\Scripts\Character\AttackEnemy.cs" />
     <Compile Include="Assets\Scripts\Character\ThirdPersonMove.cs" />
