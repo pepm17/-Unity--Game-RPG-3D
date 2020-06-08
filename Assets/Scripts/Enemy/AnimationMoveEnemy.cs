@@ -5,27 +5,42 @@ using UnityEngine;
 public class AnimationMoveEnemy : MonoBehaviour
 {
     private Animator animator;
-    private CharacterController characterController;
+    private PointsEnemy pointsEnemy;
 
     private void Start()
     {
         this.animator = GetComponent<Animator>();
-        //this.characterController = GetComponent<CharacterController>();
+        this.pointsEnemy = GetComponent<PointsEnemy>();
     }
 
-    void Update()
+    private void Update()
     {
-        this.AttackAnimation();
-        this.Damage();
+        this.Death();
     }
 
-    private void AttackAnimation()
+    public void Damage()
     {
-       
+        this.animator.SetBool("Damage", true);
+        StartCoroutine(this.RecoverFromDamage());
     }
 
-    private void Damage()
+    IEnumerator RecoverFromDamage()
     {
-        
+        yield return new WaitForSeconds(0.1f);
+        this.animator.SetBool("Damage", false);
+    }
+
+    private void Death()
+    {
+        if(this.pointsEnemy.Health <= 0)
+        {
+            this.animator.SetBool("Death", true);
+            StartCoroutine(this.DeseapearBody());
+        }
+    }
+    IEnumerator DeseapearBody()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(animator.gameObject);
     }
 }
