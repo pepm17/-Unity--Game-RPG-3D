@@ -6,10 +6,14 @@ public class PointsEnemy : MonoBehaviour
 {
     private GameObject[] players;
 
+    [Header("Status")]
+    private float giveExperience;
+
     private void Start()
     {
         this.players = GameObject.FindGameObjectsWithTag("Player");
-    }
+        this.giveExperience = 70f;
+}
     public int Health { get; private set; } = 10;
 
     public void Damage(int damage)
@@ -21,7 +25,7 @@ public class PointsEnemy : MonoBehaviour
     {
         foreach (GameObject item in this.players)
         {
-            item.GetComponent<Status>().GetExperience(50f);
+            item.GetComponent<Status>().GetExperience(this.giveExperience);
         }
     }
 }
