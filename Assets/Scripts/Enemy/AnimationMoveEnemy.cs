@@ -34,6 +34,7 @@ public class AnimationMoveEnemy : MonoBehaviour
         }
     }
 
+    
     IEnumerator RecoverFromAnimation(int interaction, float time)
     {
         yield return new WaitForSeconds(time);

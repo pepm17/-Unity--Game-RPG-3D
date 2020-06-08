@@ -18,6 +18,7 @@ public class AnimationMove : MonoBehaviour
     {
         this.WalkAnimation();
         this.AttackAnimation();
+        this.Jump();
     }
 
     private void WalkAnimation()
@@ -49,6 +50,18 @@ public class AnimationMove : MonoBehaviour
         else
         {
             this.animator.SetBool("Attack2", false);
+        }
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            this.animator.SetBool("Jump", true);
+        }
+        else
+        {
+            this.animator.SetBool("Jump", false);
         }
     }
 }
