@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class PointsEnemy : MonoBehaviour
 {
-    private GameObject[] players;
+    private GameObject players;
+    private AnimationMoveEnemy animationEnemy;
 
-    [Header("Status")]
+    [Header("Status ")]
     private float giveExperience;
+    private float defense;
+
+    public float Health { get; private set; }
 
     private void Start()
     {
-        this.players = GameObject.FindGameObjectsWithTag("Player");
+        this.players = GameObject.FindGameObjectWithTag("Player");
+        this.animationEnemy = GetComponent<AnimationMoveEnemy>();
         this.giveExperience = 70f;
-}
-    public int Health { get; private set; } = 10;
+        this.Health = 100f;
+        this.defense = 5f;
+    }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
-        this.Health -= damage;
+        float resul = damage - this.defense;
+        if(resul < 0)
+        {
+            this.Health -= 0.1f;
+        }
+        else
+        {
+            this.Health -= resul;
+        }
+        if(this.Health <= 0)
+        {
+            GiveExperieceToDie();
+            this.animationEnemy.Death();
+
+        }
     }
 
     public void GiveExperieceToDie()
     {
-        foreach (GameObject item in this.players)
-        {
-            item.GetComponent<Status>().GetExperience(this.giveExperience);
-        }
+        players.GetComponent<Status>().GetExperience(this.giveExperience);        
     }
 }

@@ -6,17 +6,10 @@ public class AnimationMoveEnemy : MonoBehaviour
 {
     [Header("References")]
     private Animator animator;
-    private PointsEnemy pointsEnemy;
 
     private void Awake()
     {
         this.animator = GetComponent<Animator>();
-        this.pointsEnemy = GetComponent<PointsEnemy>();
-    }
-
-    private void Update()
-    {
-        Death();
     }
 
     public void Damage()
@@ -25,17 +18,14 @@ public class AnimationMoveEnemy : MonoBehaviour
         StartCoroutine(this.RecoverFromAnimation(1, 0.1f));
     }
 
-    private void Death()
+    public void Death()
     {
-        if(this.pointsEnemy.Health <= 0)
-        {
-            this.animator.SetBool("Death", true);
-            StartCoroutine(RecoverFromAnimation(2, 5f));
-        }
+        this.animator.SetBool("Death", true);
+        StartCoroutine(RecoverFromAnimation(2, 5f));
     }
 
     
-    IEnumerator RecoverFromAnimation(int interaction, float time)
+    private IEnumerator RecoverFromAnimation(int interaction, float time)
     {
         yield return new WaitForSeconds(time);
         switch (interaction)
@@ -47,7 +37,6 @@ public class AnimationMoveEnemy : MonoBehaviour
                 }
             case 2:
                 {
-                    this.pointsEnemy.GiveExperieceToDie();
                     Destroy(animator.gameObject);
                     break;
                 }

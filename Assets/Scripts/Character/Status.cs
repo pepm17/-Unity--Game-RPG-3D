@@ -14,30 +14,45 @@ public class Status : MonoBehaviour
     private Transform experienceBar;
     private Text levelText;
 
+    //[Header("Habilities")]
+    public float Strength { get; private set; }
+    public float Vitality { get; private set; }
+    public float Agility { get; private set; }
+    public float Intelligence { get; private set; }
+    public float Dexterity { get; private set; }
+    public float Cunningness { get; private set; }
+
     private void Start()
     {
         this.level = 1;
         this.exp = 0f;
-        this.totalExp = 40f;
-        this.experienceBar = UIController.instance.transform.Find("BackgroundStatus/Experience");
-        this.levelText = UIController.instance.transform.Find("BackgroundStatus/Experience/Text").GetComponent<Text>();
+        this.totalExp = 100f;
+        this.Strength = 20f;
+        this.experienceBar = UIController.instance.Canvas.transform.Find("Status/Experience");
+        this.levelText = UIController.instance.Canvas.transform.Find("Status/Experience/Text").GetComponent<Text>();
     }
 
     public void GetExperience(float exp)
     {
         this.exp += exp;
-        if(this.exp >= this.totalExp)
+        while (this.exp >= this.totalExp)
         {
             LevelUp();
         }
+        UIStats();
     }
 
     private void LevelUp()
     {
         this.level++;
-        this.exp = this.exp - this.totalExp;
+        this.exp -= this.totalExp;
         this.totalExp += 40;
-        UIStats();
+        SkillsUp();
+    }
+
+    private void SkillsUp()
+    {
+        this.Strength += 3; 
     }
 
     private void UIStats()

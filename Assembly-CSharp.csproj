@@ -72,6 +72,9 @@
     <Compile Include="Assets\Scripts\Character\UIController.cs" />
     <Compile Include="Assets\Scripts\Enemy\AnimationMoveEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\PointsEnemy.cs" />
+    <Compile Include="Assets\Scripts\General\DialogueManager.cs" />
+    <Compile Include="Assets\Scripts\General\InputManager.cs" />
+    <Compile Include="Assets\Scripts\NPC\NPCController.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Otros/Unity/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

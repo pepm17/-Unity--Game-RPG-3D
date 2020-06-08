@@ -5,17 +5,13 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
-    void Start()
+    public Transform Canvas { get; private set; }
+    void Awake()
     {
         if (!instance)
         {
             instance = this;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Canvas = GameObject.Find("Canvas").transform;
     }
 }
